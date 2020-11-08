@@ -3,11 +3,22 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 const app = express();
+
+const dbUri = "mongodb+srv://phawazzzy:myPassword;@cluster0.txf1t.mongodb.net/authinnode?retryWrites=true&w=majority";
+
+mongoose.connect(dbUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+// eslint-disable-next-line no-console
+}).then(console.log("database connected"));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
